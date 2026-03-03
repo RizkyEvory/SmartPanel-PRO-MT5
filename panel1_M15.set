@@ -1,0 +1,201 @@
+; M4DI_UciH4_SmartPanel_PRO.mq5
+; Set File: INTRADAY MODE - XAUUSD M15
+; Author   : M4DI~UciH4
+; Version  : 2.10
+; Timeframe: M15
+; Updated  : 2026.03.03
+; -------------------------------------------------------
+; CATATAN:
+;   - Attach EA ke chart XAUUSD M15
+;   - Gunakan broker dengan spread rendah (< 30 points)
+;   - Session aktif: London 08:00-12:00 & NY 13:00-17:00
+;   - MTF Filter: H1 + H4 (harus satu arah dulu)
+;   - Disarankan modal minimum $1000 dengan lot 0.01
+; -------------------------------------------------------
+
+[M4DI_UciH4_SmartPanel_PRO]
+
+; ══════════ LOT MANAGEMENT ══════════
+InpLotSize=0.01
+InpAutoLot=true
+InpRiskPercent=1.0
+InpMaxSlippage=20
+InpMaxLotSize=2.0
+InpUseCompounding=false
+
+; ══════════ SL/TP SETTINGS ══════════
+InpUseAutoSL=true
+InpUseAutoTP=true
+InpSL_Points=150
+InpTP_Points=250
+InpATR_SLTP=true
+InpATR_Period=14
+InpATR_MultiplierSL=1.0
+InpATR_MultiplierTP=1.8
+InpUseHiddenSLTP=false
+
+; ══════════ PARTIAL CLOSE SYSTEM ══════════
+InpUsePartialClose=true
+InpPartial1_Percent=50.0
+InpPartial1_Points=120
+InpPartial2_Percent=30.0
+InpPartial2_Points=200
+InpMoveToBEAfterPartial=true
+
+; ══════════ TRAILING STOP ══════════
+InpUseTrailing=true
+InpTrailingPoints=80
+InpTrailingStep=10
+InpUseSmartTrailing=true
+InpSmartTrailMultiplier=0.8
+InpUseParabolicTrailing=false
+InpSAR_Step=0.02
+InpSAR_Maximum=0.2
+InpUseChandelierExit=false
+InpChandelierPeriod=22
+InpChandelierMultiplier=3.0
+
+; ══════════ BREAK EVEN ══════════
+InpUseBreakEven=true
+InpBE_Trigger=80
+InpBE_Offset=15
+
+; ══════════ EQUITY PROTECTION ══════════
+InpMaxLossPercent=4.0
+InpMaxProfitPercent=3.0
+InpDailyMaxLoss=0
+InpDailyMaxProfit=0
+
+; ══════════ RECOVERY MODE ══════════
+; DIMATIKAN - kelola risiko manual dulu
+InpUseRecovery=false
+InpRecoveryType=0
+InpRecoveryMultiplier=1.5
+InpMaxRecoveryTrades=3
+InpResetAfterProfit=true
+
+; ══════════ LAYER / GRID SYSTEM ══════════
+; DIMATIKAN - tidak cocok untuk intraday
+InpUseLayer=false
+InpLayerMultiplier=1.5
+InpLayerDistance=300
+InpMaxLayer=5
+InpUseSmartGrid=false
+InpCloseLayersOnProfit=true
+
+; ══════════ EMA AUTO ENTRY ══════════
+InpUseEMASignal=true
+InpFastEMA=9
+InpSlowEMA=21
+InpSignalEMA=5
+InpRequireEMATrend=true
+
+; ══════════ MULTI-TIMEFRAME ANALYSIS ══════════
+InpUseMTF=true
+InpMTF_TF1=60
+InpMTF_TF2=240
+InpMTF_RequireAll=true
+
+; ══════════ RSI FILTER ══════════
+InpUseRSI=true
+InpRSI_Period=14
+InpRSI_Overbought=65
+InpRSI_Oversold=35
+InpRSI_Divergence=false
+
+; ══════════ MACD FILTER ══════════
+InpUseMACD=true
+InpMACD_Fast=12
+InpMACD_Slow=26
+InpMACD_Signal=9
+
+; ══════════ ADX TREND STRENGTH ══════════
+InpUseADX=true
+InpADX_Period=14
+InpADX_MinLevel=25
+InpADX_DIConfirm=true
+
+; ══════════ BOLLINGER BANDS ══════════
+; DIMATIKAN - cukup kombinasi EMA+RSI+MACD+ADX
+InpUseBB=false
+InpBB_Period=20
+InpBB_Deviation=2.0
+
+; ══════════ STOCHASTIC FILTER ══════════
+InpUseStoch=false
+InpStoch_K=14
+InpStoch_D=3
+InpStoch_Slowing=3
+InpStoch_OB=80
+InpStoch_OS=20
+
+; ══════════ VOLUME ANALYSIS ══════════
+InpUseVolume=true
+InpVolume_Period=20
+InpVolume_Multiplier=1.3
+
+; ══════════ CANDLE PATTERN RECOGNITION ══════════
+; M15 sudah lebih reliable untuk pattern
+InpUseCandlePatterns=true
+InpPattern_Engulfing=true
+InpPattern_PinBar=true
+InpPattern_InsideBar=true
+InpPattern_MorningStar=false
+InpPattern_Doji=false
+InpPinBar_Ratio=2.0
+
+; ══════════ SMART MONEY CONCEPTS ══════════
+; DIAKTIFKAN - M15 mulai valid untuk SMC
+InpUseSMC=true
+InpSMC_OrderBlocks=true
+InpSMC_FVG=true
+InpSMC_Liquidity=true
+InpSMC_Lookback=50
+InpShowSMCZones=true
+
+; ══════════ FILTERS ══════════
+InpUseSpreadFilter=true
+InpMaxSpread=30
+InpUseSessionFilter=true
+InpSessionType=0
+InpSessionStart=08:00
+InpSessionEnd=17:00
+InpAvoidMonday=false
+InpAvoidFriday=true
+InpFridayCloseHour=17
+InpMaxTradesPerDay=6
+InpOneTradeAtTime=false
+
+; ══════════ NOTIFICATIONS ══════════
+InpUsePushNotify=false
+InpUseEmailNotify=false
+InpUseTelegram=false
+InpTelegramBotToken=
+InpTelegramChatID=
+InpNotifyOnTrade=true
+InpNotifyOnSignal=true
+
+; ══════════ SCREENSHOT & JOURNAL ══════════
+InpAutoScreenshot=false
+InpExportJournal=false
+InpJournalPath=TradeJournal
+
+; ══════════ MAGIC & ID ══════════
+InpMagicNumber=20250304
+InpTradeComment=M4DI-M15
+
+; ══════════ VISUAL SETTINGS ══════════
+InpPanelX=10
+InpPanelY=20
+InpPanelBgColor=983055
+InpPanelBorderColor=3289650
+InpButtonBuyColor=32768
+InpButtonSellColor=2237106
+InpProfitColor=65280
+InpLossColor=255
+InpFontSize=8
+
+; ══════════ ADVANCED SETTINGS ══════════
+InpRetryCount=3
+InpRetryDelay=500
+InpDebugMode=false
